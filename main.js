@@ -4,11 +4,17 @@ let output = document.getElementById("output")
 let singleBlob;
 
 async function recordScreen() { 
-    const mimeType = 'video/webm';  
-    const displayStream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: true}); 
-    const voiceStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); 
-    let tracks = [...displayStream.getTracks(), ...voiceStream.getAudioTracks()] 
-    const stream = new MediaStream(tracks); 
+    const mimeType = 'video/webm'; 
+    let stream;
+    const displayStream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: false}); 
+    if(navigator.mediaDevices.getUserMedia){
+        console.log("getUserMedia supported")
+        const voiceStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); 
+        let tracks = [...displayStream.getTracks(), ...voiceStream.getAudioTracks()] 
+        stream = new MediaStream(tracks);
+    }else{
+        stream = displayStream
+    }
     handleRecord({stream, mimeType})
 }
 recordScreen()
