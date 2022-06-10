@@ -1,0 +1,24 @@
+#btnStart,
+#btnStop{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: green;
+    width: 200px;
+    margin: 10px;
+}
+
+h1{
+    color: green;
+    margin: 20px auto;
+    width: 250px;
+}
+
+#btnStop{
+    background-color: red;
+}
+
+main{
+    width: 100%;
+}
