@@ -7,7 +7,7 @@ let singleBlob;
 async function recordScreen() { 
     const mimeType = 'video/webm'; 
     let stream;
-    const displayStream = await navigator.mediaDevices.getDisplayMedia({video: {width : 640 , height : 480}, audio: false}); 
+    const displayStream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: false}); 
     let ask = confirm("Record Voice?")
     if(ask){
         const voiceStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); 
