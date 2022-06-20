@@ -2,9 +2,10 @@ let start = document.getElementById('btnStart');
 let stop = document.getElementById('btnStop');
 let outPut = document.getElementById("output")
 let h1 = document.getElementById("head")
+let askUser = document.getElementById("ask")
 let singleBlob;
 
-async function recordScreen() { 
+async function recordScreen() {
     const mimeType = 'video/webm'; 
     let stream;
     const displayStream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: false}); 
@@ -18,7 +19,7 @@ async function recordScreen() {
     }
     handleRecord({stream, mimeType})
 }
-recordScreen()
+askUser.addEventListener("click",recordScreen)
 
 const handleRecord = function ({stream, mimeType}) {          
     const mediaRecorder = new MediaRecorder(stream);
