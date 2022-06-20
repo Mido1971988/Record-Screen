@@ -1,6 +1,6 @@
 let start = document.getElementById('btnStart');
 let stop = document.getElementById('btnStop');
-let output = document.getElementById("output")
+let outPut = document.getElementById("output")
 let h1 = document.getElementById("head")
 let singleBlob;
 
@@ -46,6 +46,6 @@ const handleRecord = function ({stream, mimeType}) {
         let videoEl = document.createElement("video") 
         videoEl.setAttribute("controls","")
         videoEl.src = videoURL;
-        output.appendChild(videoEl)
+        outPut.appendChild(videoEl)
     };  
 };
