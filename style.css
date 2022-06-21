@@ -1,6 +1,7 @@
 #btnStart,
 #btnStop,
-#ask{
+#ask,
+#download{
     padding: 10px;
     border-radius: 10px;
     border: none;
@@ -8,6 +9,16 @@
     background-color: green;
     width: 200px;
     margin: 10px;
+}
+
+#download{
+    display: none;
+}
+
+#download a{
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
 }
 
 h1{

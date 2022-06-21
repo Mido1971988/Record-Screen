@@ -48,5 +48,13 @@ const handleRecord = function ({stream, mimeType}) {
         videoEl.setAttribute("controls","")
         videoEl.src = videoURL;
         outPut.appendChild(videoEl)
+        setTimeout(function(){
+            let a = document.getElementById("downloadLink");
+            let downloadBtn = document.getElementById("download")
+            downloadBtn.style.display ="block";
+            a.href = videoEl.src; 
+            a.download = "RecordedScreen.mp4"; 
+        },1000)
     };  
 };
+
