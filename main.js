@@ -3,7 +3,9 @@ let stop = document.getElementById('btnStop');
 let outPut = document.getElementById("output")
 let h1 = document.getElementById("head")
 let askUser = document.getElementById("ask")
-let singleBlob;
+// let singleBlob;
+let startTime;
+let mediaParts = [];
 
 async function recordScreen() {
     const mimeType = 'video/webm'; 
@@ -25,9 +27,10 @@ const handleRecord = function ({stream, mimeType}) {
     const mediaRecorder = new MediaRecorder(stream);
     start.addEventListener('click', (ev)=>{
         if(mediaRecorder.state === "inactive"){
-        mediaRecorder.start();
-        h1.textContent = "Recording the Screen Now...."
-        h1.style.color = "green"
+            startTime = Date.now();
+            mediaRecorder.start();
+            h1.textContent = "Recording the Screen Now...."
+            h1.style.color = "green"
         }
     })
     stop.addEventListener('click', (ev)=>{
@@ -39,11 +42,19 @@ const handleRecord = function ({stream, mimeType}) {
     });    
     mediaRecorder.ondataavailable = function (e) {     
         if (e.data.size > 0) {       
-            singleBlob = e.data
+            // singleBlob = e.data
+            mediaParts.push(e.data);
         }        
     };   
-    mediaRecorder.onstop = function () {      
-        let videoURL = window.URL.createObjectURL(singleBlob);
+    mediaRecorder.onstop = function () {
+        let duration = Date.now() - startTime; 
+        let allBlobs = new Blob(mediaParts, { type: 'video/webm' })
+        ysFixWebmDuration(allBlobs, duration, function(fixedBlob) {
+            displayResult(fixedBlob);
+        });
+    };
+    function displayResult(fixedBlob){
+        let videoURL = window.URL.createObjectURL(fixedBlob);
         let videoEl = document.createElement("video") 
         videoEl.setAttribute("controls","")
         videoEl.src = videoURL;
@@ -55,6 +66,6 @@ const handleRecord = function ({stream, mimeType}) {
             a.href = videoEl.src; 
             a.download = "RecordedScreen.mp4"; 
         },1000)
-    };  
+    }
 };
 
