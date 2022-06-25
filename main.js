@@ -1,4 +1,4 @@
-import {ysFixWebmDuration} from "./node_modules/fix-webm-duration/fix-webm-duration.js"
+import {ysFixWebmDuration} from "./fix-webm-duration.js"
 
 let start = document.getElementById('btnStart');
 let stop = document.getElementById('btnStop');
