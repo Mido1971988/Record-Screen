@@ -5,7 +5,7 @@ let stop = document.getElementById('btnStop');
 let outPut = document.getElementById("output")
 let h1 = document.getElementById("head")
 let askUser = document.getElementById("ask")
-// let singleBlob;
+let singleBlob;
 let startTime;
 let mediaParts = [];
 
@@ -44,14 +44,14 @@ const handleRecord = function ({stream, mimeType}) {
     });    
     mediaRecorder.ondataavailable = function (e) {     
         if (e.data.size > 0) {       
-            // singleBlob = e.data
-            mediaParts.push(e.data);
+            singleBlob = e.data
+            // mediaParts.push(e.data);
         }        
     };   
     mediaRecorder.onstop = function () {
         let duration = Date.now() - startTime; 
-        let allBlobs = new Blob(mediaParts, { type: 'video/webm' })
-        ysFixWebmDuration(allBlobs, duration, function(fixedBlob) {
+        // let allBlobs = new Blob(mediaParts, { type: 'video/webm' })
+        ysFixWebmDuration(singleBlob, duration, function(fixedBlob) {
             displayResult(fixedBlob);
         });
     };
